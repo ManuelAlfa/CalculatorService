@@ -41,3 +41,4 @@ C:\vass\CalculatorApiService\CalculatorApiService\bin\es\System.Web.Http.resourc
 C:\vass\CalculatorApiService\CalculatorApiService\bin\es\System.Web.Http.WebHost.resources.dll
 C:\vass\CalculatorApiService\CalculatorApiService\obj\Debug\CalculatorApiService.dll
 C:\vass\CalculatorApiService\CalculatorApiService\obj\Debug\CalculatorApiService.pdb
+C:\vass\CalculatorApiService\CalculatorApiService\obj\Debug\CalculatorApiService.csprojResolveAssemblyReference.cache

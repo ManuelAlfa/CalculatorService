@@ -2,6 +2,7 @@
 <html>
 <<head>
     <title>Caculator Client</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <script>
@@ -133,25 +134,48 @@
 
 </head>
 <body>
-    <div style="text-align:center">
+    <div>
         <h2>Calculador Simple</h2>
 
-        <!-- Number type is not supported in IE9 and prior versions -->
-       Introduzca el primer término :   <input type="text"
-                                       id="txTermino1" min="1" max="100"><br><br>
-       Introduzca el segundo término :   <input type="text"
-                                       id="txTermino2" min="1" max="100"><br /><br>
-       Introduzca valor para raíz cuadrada :   <input type="text"
-                                                 id="txTermino" min="1" max="100"><br /><br>
+        <form class="form-horizontal">
 
-      Resultados del calculo : <input type="text"
-                                              id="txtResult" disabled /><br /><br>
-        <input type="button" value="Add" id="btnAdd">
-        <input type="button" value="Substract" id="btnMinus">
-        <input type="button" value="Multiply" id="btnMultiply">
-        <input type="button" value="Divide" id="btnDivide">
-        <input type="button" value="Raiz" id="btnRaiz">
-    </div>
+            <div class="form-group">
+                <label class="control-label col-xs-3">Introduzca el primer término :</label>
+                <div class="col-xs-9">
+                    <input type="text" id="txTermino1" min="1" max="100">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-3">Introduzca el segundo término : </label>
+                <div class="col-xs-9">
+                    <input type="text" id="txTermino2" min="1" max="100">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-3"> Introduzca valor para raíz cuadrada : </label>
+                <div class="col-xs-9">
+                    <input type="text" id="txTermino" min="1" max="100">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-3"> Resultados del calculo : </label>
+                <div class="col-xs-9">
+                    <input type="text" id="txtResult" disabled>
+                </div>
+            </div>
 
+
+            <br>
+            <div class="form-group">
+                <div class=" col-xs-12">
+                    <input type="button" value="Add" id="btnAdd">
+                    <input type="button" value="Substract" id="btnMinus">
+                    <input type="button" value="Multiply" id="btnMultiply">
+                    <input type="button" value="Divide" id="btnDivide">
+                    <input type="button" value="Raiz" id="btnRaiz">
+                </div>
+            </div>
+        </form>
+        </div>
 </body>
 </html>
