@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html>
+<<head>
+    <title>Caculator Client</title>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $(":button").click(function () {
+
+                //limpiamos el texto del resultado 
+                //antes de cada operacion
+                $("#txtResult").val("");
+
+
+                //Construimos la petición de operación pedida 
+                //por el usuario
+
+                var value1 = $("#txTermino1").val();
+                var value2 = $("#txTermino2").val();
+                var value3 = $("#txTermino").val();
+
+                var arg = "Termino1=" + value1 + "&Termino2=" + value2;
+                var argRaiz = "Termino=" + value3;
+
+
+                var control = event.target || event.srcElement;
+                var id = control.id
+
+
+                var msgvalidate = "";
+                //funcion con la que realizamos la validación de los operadores antes de empezar
+               function valida(id)
+               {
+                   var emptyTermino1 = false;
+                   var emptyTermino2 = false;
+                    //para el caso de operaciones distintas de la raiz cuadrada 
+                    //comprobamos que los dos campos no estan vacios y que son numeros
+                    if (id != 'btnRaiz')
+                    {
+                                              
+                       if ((value1.trim() === '') || (value2.trim() === '') )
+                        {
+                            msgvalidate = 'necesita introducir valores numericos en ambos terminos'
+                        }
+                       else if ((isNaN(value1)) || (isNaN(value2)) ) //comprobamos si se introdujo algun caracter
+                       {
+                           msgvalidate = 'Solo se permiten valores númericos'
+                       }
+
+                        //Comprobacion de ceros (0)
+                        if ((value1.trim() === '0') || (value2.trim() === '0'))
+                            {
+                            msgvalidate = 'Las operaciones con cero arrojan resultados indeseados'
+                            }
+
+                     
+                    }
+                    //fin de la comprobacion de operadores para operaciones distintas de raiz cuadrada
+                   
+                   //Validacion para la raiz cuadrada
+                    if (id === 'btnRaiz')
+                    {
+                        if ((value3.trim() === '')   || (isNaN(value3)) ){
+                            msgvalidate = 'necesita introducir  un valor numerico'
+                        }
+                       
+
+                        //Comprobacion de ceros (0)
+                        if ((value3.trim() === '0')) {
+                            msgvalidate = 'El cero no tiene raíz cuadrada'
+                        }
+
+
+                    }
+                   
+               };
+
+               valida(id);
+                //si  no se pasa la validación no seguimos
+               if (msgvalidate != "")
+               {
+                   alert( msgvalidate);
+                   return;
+
+               }
+
+
+                var BaseUrl = "/api/Calculator/";
+
+                switch (id) {
+                    case 'btnAdd':
+                        BaseUrl = BaseUrl + "Add/?" + arg;
+                        break;
+                    case 'btnMinus':
+                        BaseUrl = BaseUrl + "Substract/?" + arg;
+                        break;
+                    case 'btnMultiply':
+                        BaseUrl = BaseUrl + "Multiply/?" + arg;
+                        break;
+                    case 'btnDivide':
+                        BaseUrl = BaseUrl + "Divide/?" + arg;
+                        break;
+                        
+                    case 'btnRaiz':
+                        BaseUrl = BaseUrl + "SquareRoot/?" + argRaiz;
+                        break;
+                    default:
+                        BaseUrl = BaseUrl + "prueba";
+
+                }
+
+                
+
+                $.ajax({
+                    url: BaseUrl,
+                    type: "GET",
+                    dataType: 'json',
+                    success: function (result) {
+                        $("#txtResult").val(result);
+
+                    },
+                    error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        $("#txtResult").val(err.Message)
+                    }
+                });
+            });
+
+        });
+    </script>
+
+</head>
+<body>
+    <div style="text-align:center">
+        <h2>Calculador Simple</h2>
+
+        <!-- Number type is not supported in IE9 and prior versions -->
+       Introduzca el primer término :   <input type="text"
+                                       id="txTermino1" min="1" max="100"><br><br>
+       Introduzca el segundo término :   <input type="text"
+                                       id="txTermino2" min="1" max="100"><br /><br>
+       Introduzca valor para raíz cuadrada :   <input type="text"
+                                                 id="txTermino" min="1" max="100"><br /><br>
+
+      Resultados del calculo : <input type="text"
+                                              id="txtResult" disabled /><br /><br>
+        <input type="button" value="Add" id="btnAdd">
+        <input type="button" value="Substract" id="btnMinus">
+        <input type="button" value="Multiply" id="btnMultiply">
+        <input type="button" value="Divide" id="btnDivide">
+        <input type="button" value="Raiz" id="btnRaiz">
+    </div>
+
+</body>
+</html>
